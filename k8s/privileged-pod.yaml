@@ -1,0 +1,13 @@
+# UC7: privileged pod from an UNAPPROVED registry. Expect admission Block + PR/IaC finding.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: payments-rogue
+  namespace: payments
+  labels: {app: payments, team: payments, env: demo}
+spec:
+  containers:
+    - name: rogue
+      image: docker.io/library/nginx:1.14
+      securityContext:
+        privileged: true

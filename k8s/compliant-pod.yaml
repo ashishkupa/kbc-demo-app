@@ -1,0 +1,14 @@
+# Passes admission: non-privileged, image from the approved registry (replace ACCOUNT/REGION).
+apiVersion: v1
+kind: Pod
+metadata:
+  name: payments-ok
+  namespace: payments
+  labels: {app: payments, team: payments, env: demo}
+spec:
+  containers:
+    - name: app
+      image: ACCOUNT.dkr.ecr.REGION.amazonaws.com/kbc-payments:latest
+      securityContext:
+        privileged: false
+        allowPrivilegeEscalation: false
